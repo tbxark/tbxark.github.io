@@ -7,18 +7,13 @@
   "license": "MIT",
   "repository": "git@github.com:TBXark/tbxark.github.io.git",
   "scripts": {
-    "preview": "serve -l 23400",
+    "preview": "node ./bin/preview.js",
     "blogs": "node ./bin/blogs.js",
     "repos": "node ./bin/repos.js",
+    "projects": "node ./bin/repos.js",
     "merge": "node ./bin/merge.js",
-    "build": "npm run merge && node ./bin/build.js",
-    "lint": "eslint --fix src bin",
-    "dev": "npm run preview"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "eslint": "^9.39.1",
-    "globals": "^16.5.0",
-    "serve": "^14.2.6"
+    "build": "node ./bin/merge.js && node ./bin/build.js",
+    "lint": "node ./bin/check.js",
+    "dev": "node ./bin/preview.js"
   }
 }

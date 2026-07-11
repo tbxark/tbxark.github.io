@@ -4,21 +4,25 @@
 
 
 ### Usage
+
+The site has no third-party dependencies. Node.js 18 or newer is sufficient for
+the local development and build scripts; no install step is required.
+
 ```bash
-# NPM Scripts (Recommended)
-npm run dev      # Build and serve on localhost
+# NPM scripts
+npm run dev      # Serve on localhost
 npm run build    # Build the site (merge data + update SHA)
 npm run preview  # Serve on localhost
 npm run blogs    # Create /api/blogs.json
-npm run projects # Create /api/projects.json
+npm run projects # Create /api/repos.json
 npm run merge    # Merge API data into /src/data.js
-npm run lint     # Run ESLint
+npm run lint     # Check JavaScript syntax
 
-# Legacy Makefile support
+# Makefile commands (also dependency-free)
 make preview # serve on localhost
 make build # build the site for cloudflare page
 make blogs # create /api/blogs.json
-make projects # create /api/projects.json
+make projects # create /api/repos.json
 ```
 
 ### Architecture

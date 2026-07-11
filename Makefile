@@ -1,13 +1,14 @@
 .PHONY: preview, blogs, projects, build
 
 preview:
-	npm run preview
+	node ./bin/preview.js
 
 blogs:
-	npm run blogs
+	node ./bin/blogs.js
 
 projects:
-	npm run projects
+	node ./bin/repos.js
 
 build:
+	node ./bin/merge.js
 	node ./bin/build.js
