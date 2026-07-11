@@ -1,211 +1,59 @@
+:root {
+  --mono: 'SF Mono', ui-monospace, Menlo, Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 body {
-  margin: 0px;
-  background-color: #0d1117;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  margin: 0;
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #ededed;
+  font-family: var(--mono);
 }
 
-.stretch-column-container {
+.page {
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: -webkit-flex;
-  display: flex;
-}
-
-.stretch-row-container {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-  display: -webkit-flex;
-  display: flex;
-}
-
-.windows {
-  max-width: 750px;
-  width: 80%;
-  align-self: center;
-  display: flex;
-}
-
-.windows-button {
-  border-radius: 100%;
-  width: 12px;
-  height: 12px;
-  flex-grow: 0;
-  margin: 0px 8px 0px 0px;
-  display: flex;
-}
-
-.exe {
-  color: #79c0ff;
-  text-decoration: none;
-  margin: 0px 10px 0px 0px;
-}
-
-.exe:hover {
-  text-decoration: underline;
-  color: #a5a5a5;
-}
-
-.folder {
-  color: #7dd3fc;
-  text-decoration: none;
-}
-
-.file {
-  color: #e6edf3;
-  text-decoration: none;
-}
-
-.file:hover {
-  color: #f0f6fc;
-  text-decoration: underline;
-}
-
-.bar {
-  text-align: center;
-  height: 25px;
-  background-color: #30363d;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  align-content: center;
-  justify-content: flex-start;
-  align-items: center;
-  border-radius: 8px 8px 0px 0px;
-  display: flex;
-  border-bottom: 1px solid #21262d;
-}
-
-.screen-container {
-  background-color: #161b22;
-  scrollbar-width: none;
-}
-
-.screen-container::-webkit-scrollbar {
-  display: none;
-}
-
-.screen-display {
-  min-height: 500px;
-  max-height: 550px;
-  overflow: scroll;
-  margin: 0 auto;
-}
-
-.screen-bottom {
-  height: 10px;
-  border-radius: 0px 0px 8px 8px;
-}
-
-.cmd-line {
-  outline: none;
-  background-color: transparent;
-  margin-bottom: 50px;
-  padding-bottom: 50px;
-  width: 100%;
-  min-height: 10px;
-  border: none;
-  flex-grow: 1;
-}
-
-.cmd-text {
-  color: #e6edf3;
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  font-size: 12px;
-  text-align: left;
-  position: static;
-  margin: 10px 10px 0px 10px;
-  font-weight: 500;
-}
-
-.copyright {
-  width: 100%;
-  height: 10%;
-  color: #7d8590;
-  font-size: 10pt;
-  text-align: center;
-  margin: 20px 0px 0px 0px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  min-height: 100vh;
 }
 
 .head-title {
-  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  color: #f0f6fc;
-  margin: auto;
-  padding: 35px;
+  margin: 0;
+  padding: 40px 20px 28px;
+  color: #f4f4f4;
+  font-family: var(--mono);
   font-size: 40px;
-  text-align: center;
   font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.copyright {
+  margin: 24px 0 40px;
+  color: #8a8a8a;
+  font-family: var(--sans);
+  font-size: 12px;
+  text-align: center;
 }
 
 .avatar {
-  margin-left: 8px;
-  margin-right: 8px;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
+  margin: 0 6px;
+  border-radius: 50%;
+  vertical-align: middle;
+  filter: grayscale(1);
 }
 
 .beian {
-  font-size: 10px;
-  color: #7d8590;
-  text-decoration: none;
   margin-top: 10px;
-}
-
-.link {
-  color: #58a6ff
-}
-
-.user {
-  color: #7ee787
-}
-
-.input-exe {
-  color: #a5f3fc
-}
-
-.input-exe-error {
-  color: #f85149
-}
-
-.terminal-prompt {
-  color: #7d8590;
-  margin-right: 4px;
-  font-family: monospace;
-}
-
-.project-desc {
-  color: #8b949e;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 60ch;
-  display: inline-block;
-}
-
-.project-line {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  color: #8a8a8a;
+  font-size: 10px;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 640px) {
-  .windows {
-    width: calc(100% - 20px);
-  }
-
-  .full-mode {
-    display: none;
-  }
-
   .head-title {
     font-size: 30px;
-  }
-
-  .project-desc {
-    display: none;
-  }
-
-  .project-line {
-    max-width: calc(100vw - 60px);
   }
 }

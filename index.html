@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -8,39 +8,25 @@
     <meta name="keywords" content="tbxark,iOS,swift" />
     <meta name="author" content="tbxark" />
     <title>TBXark's Blog</title>
-    <link href="./src/home.css?sha=bea9a23" rel="stylesheet" />
+    <link href="./src/home.css?sha=232ebfb" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="stretch-column-container">
-        <div class="head-title">TBXark's Blog</div>
-        <div class="stretch-column-container">
-            <div class="windows bar">
-                <div class="windows-button" style="margin-left: 8px; background-color: #ff5a52"></div>
-                <div class="windows-button" style="background-color: #e6c029"></div>
-                <div class="windows-button" style="background-color: #52c22b"></div>
-            </div>
-            <div id="screen-container" class="windows stretch-column-container screen-container screen-display">
-                <div id="cmd-history"></div>
-                <div id="cmd-current" class="stretch-row-container">
-                    <p class="cmd-text user" style="margin-right: 0px"> guest@tbxark:~$&nbsp; </p>
-                    <input id="cmd-input" class="cmd-text cmd-line input-exe" style="margin-left: 0px" autofocus />
-                </div>
-            </div>
-            <div class="windows screen-bottom screen-container"></div>
-        </div>
-        <div class="copyright">
+    <div class="page">
+        <h1 class="head-title">TBXark's Blog</h1>
+        <blog-terminal></blog-terminal>
+        <footer class="copyright">
             <div>
-                Copyright<img class="avatar" src="./assets/avatar.png" />TBXark
+                Copyright<img class="avatar" src="./assets/avatar.png" alt="TBXark" />TBXark
             </div>
             <div>
                 <a id="beian" class="beian" style="display: none"
                     href="https://beian.miit.gov.cn/">粤ICP备19071225号-1</a>
             </div>
-        </div>
+        </footer>
     </div>
     <script src="./src/data.js?sha=400a815"></script>
-    <script src="./src/terminal.js?sha=0fa7f1b" defer></script>
+    <script src="./src/terminal.js?sha=94ade36" defer></script>
 </body>
 
 </html>
