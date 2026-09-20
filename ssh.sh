@@ -226,7 +226,7 @@ DIRECTIVES=(PasswordAuthentication PubkeyAuthentication ChallengeResponseAuthent
             KbdInteractiveAuthentication PermitEmptyPasswords AuthenticationMethods)
 
 comment_out() {
-  local file="$1" d found=0 pattern
+  local file="$1" d found=0 pattern tmp
   [[ -f "$file" ]] || return 0
   for d in "${DIRECTIVES[@]}"; do
     if grep -qiE "^[[:space:]]*${d}[[:space:]]" "$file"; then found=1; break; fi
@@ -239,7 +239,21 @@ comment_out() {
   fi
   cp -a "$file" "$file.bak.$STAMP"
   pattern="$(IFS='|'; echo "${DIRECTIVES[*]}")"
-  sed -ri "s|^([[:space:]]*(${pattern})[[:space:]].*)$|# [${PROG} ${STAMP}] \1|I" "$file"
+  tmp="$WORKDIR/$(basename "$file").rewritten"
+
+  # awk rather than sed: no GNU-only flags needed, and the alternation pattern
+  # cannot collide with a s/// delimiter.
+  if ! awk -v pat="^[ \t]*(${pattern})[ \t]" -v tag="# [${PROG} ${STAMP}] " '
+        { if (match(tolower($0), tolower(pat))) print tag $0; else print }
+      ' "$file" > "$tmp"; then
+    die "failed to rewrite $file; original left untouched (backup: $file.bak.$STAMP)"
+  fi
+  # never truncate a config down to nothing
+  if [[ ! -s "$tmp" ]] || [[ "$(wc -l < "$tmp")" -ne "$(wc -l < "$file")" ]]; then
+    die "refusing to write a suspicious rewrite of $file (backup: $file.bak.$STAMP)"
+  fi
+  # write through the existing inode so owner and mode are preserved
+  cat "$tmp" > "$file"
   ok "commented out conflicting directives in $file (backup: $file.bak.$STAMP)"
 }
 
@@ -247,7 +261,7 @@ log "Updating sshd configuration..."
 comment_out "$SSHD_CONFIG"
 
 USE_DROPIN=0
-if grep -qiE '^[[:space:]]*Include[[:space:]]+/etc/ssh/sshd_config\.d/' "$SSHD_CONFIG" 2>/dev/null; then
+if grep -qiE '^[[:space:]]*Include[[:space:]]+.*sshd_config\.d/' "$SSHD_CONFIG" 2>/dev/null; then
   USE_DROPIN=1
   shopt -s nullglob
   for f in "$SSHD_CONFIG_D"/*.conf; do
