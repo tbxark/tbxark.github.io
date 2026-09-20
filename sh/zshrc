@@ -1,0 +1,80 @@
+# env
+#
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export EDITOR="vim"
+
+# PATH
+#
+# `typeset -U` keeps the array unique, so re-sourcing never duplicates entries.
+typeset -U path PATH
+
+export GOROOT="${GOROOT:-/usr/local/go}"
+export GOPATH="${GOPATH:-$HOME/go}"
+export CARGO_HOME="${CARGO_HOME:-$HOME/.cargo}"
+export BUN_INSTALL="${BUN_INSTALL:-$HOME/.bun}"
+export DENO_INSTALL="${DENO_INSTALL:-$HOME/.deno}"
+export PNPM_HOME="${PNPM_HOME:-$HOME/.local/share/pnpm}"
+
+# Listed low priority first: each existing directory is pushed to the front,
+# so the last match below ends up first in PATH.
+for _dir in \
+  /snap/bin \
+  "$GOROOT/bin" \
+  "$GOPATH/bin" \
+  "$HOME/.rye/shims" \
+  "$DENO_INSTALL/bin" \
+  "$PNPM_HOME" \
+  "$BUN_INSTALL/bin" \
+  "$CARGO_HOME/bin" \
+  "$HOME/.local/bin" \
+  "$HOME/bin"
+do
+  [[ -d "$_dir" ]] && path=("$_dir" $path)
+done
+unset _dir
+
+# history
+#
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt APPEND_HISTORY INC_APPEND_HISTORY SHARE_HISTORY EXTENDED_HISTORY
+setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS
+
+# options
+#
+setopt AUTO_CD INTERACTIVE_COMMENTS NO_BEEP
+
+# completion
+#
+export ZSH_COMPDUMP="$HOME/.zcompdump"
+autoload -Uz compinit && compinit -C -d "$ZSH_COMPDUMP"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
+compdef sshz=ssh
+
+# keys
+#
+bindkey -e
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
+# alias
+#
+alias ls="ls --color=auto"
+alias ll="ls -lh"
+alias la="ls -lha"
+alias grep="grep --color=auto"
+
+# prompt
+#
+PROMPT='%(?..%F{red}%?%f )%F{green}%n@%m%f:%F{blue}%~%f%# '
+
+# local
+#
+# Machine specific settings live here; this file is never overwritten by zsh.sh.
+[[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
