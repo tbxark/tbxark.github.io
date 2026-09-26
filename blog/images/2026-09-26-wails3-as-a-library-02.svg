@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif">
+  <rect width="1000" height="600" fill="#ffffff"/>
+
+  <text x="40" y="46" font-size="15" font-weight="600" fill="#1f2328">能不能交叉编译，由 Wails 后端的 cgo 决定</text>
+  <text x="40" y="70" font-size="12" fill="#656d76">依据：wails v3 各平台后端源文件的 build tag。同一份代码，四个构建目标</text>
+
+  <!-- Windows -->
+  <rect x="40" y="96" width="920" height="104" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="48" y="108" width="5" height="80" rx="2.5" fill="#1a7f37"/>
+  <text x="72" y="130" font-size="15" font-weight="600" fill="#1f2328">Windows 桌面版</text>
+  <text x="200" y="130" font-size="12" fill="#8c959f">windows/amd64 · windows/arm64</text>
+  <text x="72" y="156" font-size="13" fill="#656d76">Wails 后端是纯 Go：走 COM / WebView2，没有 cgo</text>
+  <text x="72" y="180" font-size="12" fill="#57606a">//go:build windows &amp;&amp; !server</text>
+  <rect x="812" y="112" width="132" height="30" rx="15" fill="#dafbe1" stroke="#aceebb"/>
+  <text x="878" y="132" font-size="13" font-weight="600" fill="#1a7f37" text-anchor="middle">可以交叉编译</text>
+  <text x="944" y="166" font-size="12" fill="#656d76" text-anchor="end">在 macOS / Linux 上直接出 exe</text>
+  <text x="944" y="186" font-size="11" fill="#8c959f" text-anchor="end">make release-windows</text>
+
+  <!-- macOS -->
+  <rect x="40" y="216" width="920" height="104" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="48" y="228" width="5" height="80" rx="2.5" fill="#bf8700"/>
+  <text x="72" y="250" font-size="15" font-weight="600" fill="#1f2328">macOS 桌面版</text>
+  <text x="200" y="250" font-size="12" fill="#8c959f">darwin/arm64 · darwin/amd64</text>
+  <text x="72" y="276" font-size="13" fill="#656d76">Cocoa / WKWebView，必须 cgo</text>
+  <text x="72" y="300" font-size="12" fill="#57606a">#cgo LDFLAGS: -framework Cocoa</text>
+  <rect x="812" y="232" width="132" height="30" rx="15" fill="#fff8c5" stroke="#eac54f"/>
+  <text x="878" y="252" font-size="13" font-weight="600" fill="#7d4e00" text-anchor="middle">只能原生编译</text>
+  <text x="944" y="286" font-size="12" fill="#656d76" text-anchor="end">在 macOS 上：make build / make app</text>
+  <text x="944" y="306" font-size="11" fill="#8c959f" text-anchor="end">CGO_CFLAGS=-mmacosx-version-min=11.0</text>
+
+  <!-- Linux -->
+  <rect x="40" y="336" width="920" height="104" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="48" y="348" width="5" height="80" rx="2.5" fill="#bf8700"/>
+  <text x="72" y="370" font-size="15" font-weight="600" fill="#1f2328">Linux 桌面版</text>
+  <text x="200" y="370" font-size="12" fill="#8c959f">linux/amd64 · linux/arm64</text>
+  <text x="72" y="396" font-size="13" fill="#656d76">GTK3 + WebKitGTK 4.1，必须 cgo（-tags gtk3）</text>
+  <text x="72" y="420" font-size="12" fill="#57606a">//go:build linux &amp;&amp; cgo &amp;&amp; gtk3</text>
+  <rect x="812" y="352" width="132" height="30" rx="15" fill="#fff8c5" stroke="#eac54f"/>
+  <text x="878" y="372" font-size="13" font-weight="600" fill="#7d4e00" text-anchor="middle">只能原生编译</text>
+  <text x="944" y="406" font-size="12" fill="#656d76" text-anchor="end">一次一个架构，在 Linux 上编</text>
+  <text x="944" y="426" font-size="11" fill="#8c959f" text-anchor="end">需要 libgtk-3-dev · libwebkit2gtk-4.1-dev</text>
+
+  <!-- CLI -->
+  <rect x="40" y="456" width="920" height="104" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <rect x="48" y="468" width="5" height="80" rx="2.5" fill="#1a7f37"/>
+  <text x="72" y="490" font-size="15" font-weight="600" fill="#1f2328">终端版</text>
+  <text x="140" y="490" font-size="12" fill="#8c959f">-tags nogui · 6 个目标全都要</text>
+  <text x="72" y="516" font-size="13" fill="#656d76">整个 GUI 用 build tag 摘掉（gui_off.go），不留 webview 依赖</text>
+  <text x="72" y="540" font-size="12" fill="#57606a">CGO_ENABLED=0 go build -tags nogui</text>
+  <rect x="812" y="472" width="132" height="30" rx="15" fill="#dafbe1" stroke="#aceebb"/>
+  <text x="878" y="492" font-size="13" font-weight="600" fill="#1a7f37" text-anchor="middle">全平台交叉编译</text>
+  <text x="944" y="526" font-size="12" fill="#656d76" text-anchor="end">darwin / linux / windows × amd64 / arm64</text>
+</svg>

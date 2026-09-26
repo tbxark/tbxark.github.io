@@ -1,5 +1,6 @@
 # Blogs
 
+* [不用 wails3 CLI：把 Wails v3 当普通 Go 库写桌面应用](2026-09-26-wails3-as-a-library.md)	2026-09-26 23:33:39
 * [拒绝“钉子户”：深入解析 Go 的异步抢占机制 (Go 1.14+)](2025-12-09-go-sync-preemption.md)	2025-12-09 13:58:28
 * [深入解剖 Golang 调度器：当 Goroutine 陷入内核态时，发生了什么？](2025-12-09-go-gmp-syscall.md)	2025-12-09 13:44:18
 * [告别 Docker Daemon：单机 Golang 部署方案 (Ko + Podman + Systemd)](2025-11-28-ko+podman.md)	2025-11-28 13:59:44 

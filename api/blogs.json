@@ -1,5 +1,10 @@
 [
   {
+    "title": "不用 wails3 CLI：把 Wails v3 当普通 Go 库写桌面应用",
+    "date": "2026-09-26 23:33:39",
+    "fileName": "2026-09-26-wails3-as-a-library.md"
+  },
+  {
     "title": "拒绝“钉子户”：深入解析 Go 的异步抢占机制 (Go 1.14+)",
     "date": "2025-12-09 13:58:28",
     "fileName": "2025-12-09-go-sync-preemption.md"
